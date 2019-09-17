@@ -16,13 +16,15 @@ func Hammer(ch chan int) {
 	time.Sleep(time.Duration(r) * time.Second)
 	ch <- r
 }
-
 func main() {
 	rand.Seed(time.Now().UnixNano())
-
 	ch := make(chan int)
 	go Hammer(ch)
+	select {
+	case res := <-ch:
+		fmt.Println("Finished after", res, "seconds.")
+	case <-time.After(3 * time.Second):
+		fmt.Println("asd")
+	}
 
-	res := <-ch
-	fmt.Println("Finished after", res, "seconds.")
 }
