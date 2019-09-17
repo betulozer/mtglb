@@ -3,17 +3,17 @@
 // mesajı ile birlikte yeni bir hata döndürün.
 
 package main
-
 import "fmt"
 
 type File struct {
-	closed bool
+    closed bool
 }
-
-func Read(file File) {}
-
+func Read(file File) {
+    if file.closed {
+        fmt.Println("file: file is closed")
+    }
+}
 func main() {
-	f := File{closed: true}
-	err := Read(f)
-	fmt.Println(err)
+    f := File{closed: true}
+    Read(f)
 }
